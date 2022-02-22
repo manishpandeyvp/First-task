@@ -1,6 +1,5 @@
 package com.example.firsttask.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -11,20 +10,23 @@ import com.example.firsttask.R
 import com.example.firsttask.data.Member
 import com.example.firsttask.data.MemberDB
 import com.example.firsttask.data.MemberRepository
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_update_member.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class UpdateMemberActivity : AppCompatActivity() {
 
     private lateinit var repository: MemberRepository
+    private lateinit var tMember: Member
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_update_member)
 
         val memberDao = MemberDB.getDatabase(applicationContext).memberDao()
         repository = MemberRepository(memberDao)
+
+        tMember = intent.getParcelableExtra("Member")!!
     }
 
     override fun onResume() {
@@ -33,7 +35,9 @@ class MainActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, lang)
         atcv_dept.setAdapter(arrayAdapter)
 
-        btn_save.setOnClickListener {
+        setDataInFields()
+
+        btn_update.setOnClickListener {
             val username = et_name.text.toString()
             val email = et_email.text.toString()
             val gender = if (rg_gender.checkedRadioButtonId == R.id.rb_male) "Male" else "Female"
@@ -42,14 +46,8 @@ class MainActivity : AppCompatActivity() {
 
             if (validateInputs(username, email)) {
                 if (emailValidate(email)) {
-                    repository.getUserWithEmail(email).observe(this) { tMember ->
-                        if (tMember == null) {
-                            val member = Member(0, username, email, gender, empType, dept)
-                            addMember(member)
-                        } else {
-                            showUpdateDialog(tMember)
-                        }
-                    }
+                    val member = Member(tMember.id, username, email, gender, empType, dept)
+                    updateMember(member)
                 } else {
                     Toast.makeText(this, "Email format is incorrect!", Toast.LENGTH_LONG).show()
                 }
@@ -67,6 +65,20 @@ class MainActivity : AppCompatActivity() {
             } else {
                 showAlertDialog()
             }
+        }
+    }
+
+    private fun setDataInFields() {
+        et_name.setText(tMember.name)
+        et_email.setText(tMember.email)
+        toggler_emp.isChecked = tMember.empType == "Full Time"
+        atcv_dept.setText(tMember.dept)
+        if (tMember.gender == "Male") {
+            rb_male.isChecked = true
+            rb_female.isChecked = false
+        } else {
+            rb_male.isChecked = false
+            rb_female.isChecked = true
         }
     }
 
@@ -95,32 +107,12 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun showUpdateDialog(member: Member) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Email ID already exists in DB.")
-        builder.setMessage("Do you want to update the data?")
-
-        builder.setPositiveButton("YES") { dialog, _ ->
-            val intent = Intent(this, UpdateMemberActivity::class.java)
-            intent.putExtra("Member", member)
-            startActivity(intent)
-            dialog.dismiss()
-            finish()
-        }
-
-        builder.setNegativeButton("CANCEL") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        builder.show()
-    }
-
-    private fun addMember(member: Member) {
+    private fun updateMember(member: Member) {
         lifecycleScope.launch(Dispatchers.IO) {
-            repository.addMember(member)
+            repository.updateUser(member)
             println(member)
         }.also {
-            Toast.makeText(this, "Successfully saved!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Successfully updated!", Toast.LENGTH_LONG).show()
             finish()
         }
     }

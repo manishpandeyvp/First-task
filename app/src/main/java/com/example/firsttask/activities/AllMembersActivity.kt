@@ -27,7 +27,7 @@ class AllMembersActivity : AppCompatActivity() {
         super.onResume()
 
         rv_teammates.layoutManager = LinearLayoutManager(this)
-        val adapter = MembersAdapter()
+        val adapter = MembersAdapter(this)
         rv_teammates.adapter = adapter
 
         repository.getAllMembers.observe(this) { user ->
@@ -43,4 +43,5 @@ class AllMembersActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
+
 }

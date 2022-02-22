@@ -10,4 +10,12 @@ class MemberRepository(
     suspend fun addMember(member: Member) {
         memberDao.addMember(member)
     }
+
+    fun getUserWithEmail(email: String): LiveData<Member> {
+        return memberDao.getUserWithEmail(email)
+    }
+
+    suspend fun updateUser(member: Member) {
+        memberDao.updateMember(member)
+    }
 }

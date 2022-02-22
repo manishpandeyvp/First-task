@@ -1,14 +1,19 @@
 package com.example.firsttask.adapters
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.R
+import com.example.firsttask.activities.UpdateMemberActivity
 import com.example.firsttask.data.Member
 import kotlinx.android.synthetic.main.item_member.view.*
 
-class MembersAdapter : RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
+class MembersAdapter(
+    private val context: Context
+) : RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
 
     private var membersList = emptyList<Member>()
 
@@ -28,7 +33,6 @@ class MembersAdapter : RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
         view.tv_gender.text = member.gender
         view.tv_dept.text = member.dept
         view.tv_emp_type.text = member.empType
-
     }
 
     override fun getItemCount(): Int {
