@@ -1,13 +1,11 @@
 package com.example.firsttask.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.R
-import com.example.firsttask.activities.UpdateMemberActivity
 import com.example.firsttask.data.Member
 import kotlinx.android.synthetic.main.item_member.view.*
 
@@ -16,6 +14,7 @@ class MembersAdapter(
 ) : RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
 
     private var membersList = emptyList<Member>()
+    private var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -33,6 +32,18 @@ class MembersAdapter(
         view.tv_gender.text = member.gender
         view.tv_dept.text = member.dept
         view.tv_emp_type.text = member.empType
+
+        view.iv_edit.setOnClickListener {
+            if(onClickListener != null){
+                onClickListener!!.onClickEdit(member)
+            }
+        }
+
+        view.iv_delete.setOnClickListener {
+            if (onClickListener != null){
+                onClickListener!!.onClickDelete(member)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +53,15 @@ class MembersAdapter(
     fun setData(members: List<Member>) {
         this.membersList = members
         notifyDataSetChanged()
+    }
+
+    interface OnClickListener {
+        fun onClickEdit(member: Member)
+        fun onClickDelete(member: Member)
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener){
+        this.onClickListener = onClickListener
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

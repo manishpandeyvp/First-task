@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.R
 import com.example.firsttask.adapters.MembersAdapter
+import com.example.firsttask.data.Member
 import com.example.firsttask.data.MemberDB
 import com.example.firsttask.data.MemberRepository
 import kotlinx.android.synthetic.main.activity_all_members.*
@@ -29,6 +30,16 @@ class AllMembersActivity : AppCompatActivity() {
         rv_teammates.layoutManager = LinearLayoutManager(this)
         val adapter = MembersAdapter(this)
         rv_teammates.adapter = adapter
+
+        adapter.setOnClickListener(object : MembersAdapter.OnClickListener {
+            override fun onClickEdit(member: Member) {
+                println("Edit : ${member.email}")
+            }
+
+            override fun onClickDelete(member: Member) {
+                println("delete : ${member.email}")
+            }
+        })
 
         repository.getAllMembers.observe(this) { user ->
             if (user.isNotEmpty()) {
