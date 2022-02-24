@@ -6,12 +6,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.firsttask.R
 import com.example.firsttask.data.Member
 import com.example.firsttask.data.MemberDB
 import com.example.firsttask.data.MemberRepository
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addMember(member: Member) {
-        lifecycleScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             repository.addMember(member)
             println(member)
         }.also {

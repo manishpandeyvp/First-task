@@ -18,4 +18,8 @@ class MemberRepository(
     suspend fun updateUser(member: Member) {
         memberDao.updateMember(member)
     }
+
+    suspend fun deleteMember(member: Member){
+        memberDao.deleteMember(member)
+    }
 }
