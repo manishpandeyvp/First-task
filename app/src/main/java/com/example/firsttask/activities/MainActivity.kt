@@ -10,6 +10,8 @@ import com.example.firsttask.R
 import com.example.firsttask.data.Member
 import com.example.firsttask.data.MemberDB
 import com.example.firsttask.data.MemberRepository
+import com.example.firsttask.utils.DialogBox
+import com.example.firsttask.utils.Validator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,15 +42,16 @@ class MainActivity : AppCompatActivity() {
             val empType = if (toggler_emp.isChecked) "Full Time" else "Part Time"
             val dept = atcv_dept.text.toString()
 
-            if (validateInputs(username, email)) {
-                if (emailValidate(email)) {
+            if (Validator.validateInputs(username, email)) {
+                if (Validator.validateEmail(email)) {
                     repository.getUserWithEmail(email).observe(this) { tMember ->
-                        if (tMember == null) {
-                            val member = Member(0, username, email, gender, empType, dept)
-                            addMember(member)
-                        } else {
-                            showUpdateDialog(tMember)
-                        }
+//                        if (tMember == null) {
+//                            val member = Member(0, username, email, gender, empType, dept)
+//                            addMember(member)
+//                        } else {
+////                            DialogBox.showUpdateDialog(tMember, this, MainActivity())
+//                            showUpdateDialog(tMember)
+//                        }
                     }
                 } else {
                     Toast.makeText(this, "Email format is incorrect!", Toast.LENGTH_LONG).show()
@@ -65,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             if (username.isEmpty() && email.isEmpty()) {
                 finish()
             } else {
+//                DialogBox.showAlertDialog(this, MainActivity())
                 showAlertDialog()
             }
         }
@@ -74,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         if (et_name.text.toString().isEmpty() && et_email.text.toString().isEmpty()) {
             super.onBackPressed()
         } else {
+//            DialogBox.showAlertDialog(this, MainActivity())
             showAlertDialog()
         }
     }
@@ -103,8 +108,8 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("YES") { dialog, _ ->
             val intent = Intent(this, UpdateMemberActivity::class.java)
             intent.putExtra("Member", member)
-            startActivity(intent)
             dialog.dismiss()
+            startActivity(intent)
             finish()
         }
 
@@ -125,14 +130,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun emailValidate(email: String): Boolean {
-        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun validateInputs(
-        username: String,
-        email: String,
-    ): Boolean {
-        return !(username.isEmpty() || email.isEmpty())
-    }
+//    private fun emailValidate(email: String): Boolean {
+//        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//    }
+//
+//    private fun validateInputs(
+//        username: String,
+//        email: String,
+//    ): Boolean {
+//        return !(username.isEmpty() || email.isEmpty())
+//    }
 }

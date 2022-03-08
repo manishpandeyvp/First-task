@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_female.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/ic_male.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/ic_no.xml" value="0.1555" />
+        <entry key="app/src/main/res/drawable/ic_people.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/rounded_bg_black.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/rounded_bg_black_thick.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/rounded_bg_black_thin.xml" value="0.1555" />
@@ -18,13 +19,17 @@
         <entry key="app/src/main/res/font/cormorant.xml" value="0.2717948717948718" />
         <entry key="app/src/main/res/font/serif_display.xml" value="0.2717948717948718" />
         <entry key="app/src/main/res/layout/activity_all_members.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24205128205128204" />
         <entry key="app/src/main/res/layout/activity_update_member.xml" value="0.24375" />
+        <entry key="app/src/main/res/layout/add_member_fragment.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/layout/all_members_fragment.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/demo.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_member.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/member_item.xml" value="0.24205128205128204" />
         <entry key="app/src/main/res/layout/spinner_layout.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1555" />
       </map>
     </option>

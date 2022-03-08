@@ -10,6 +10,7 @@ import com.example.firsttask.R
 import com.example.firsttask.data.Member
 import com.example.firsttask.data.MemberDB
 import com.example.firsttask.data.MemberRepository
+import com.example.firsttask.utils.Validator
 import kotlinx.android.synthetic.main.activity_update_member.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,8 +45,8 @@ class UpdateMemberActivity : AppCompatActivity() {
             val empType = if (toggler_emp.isChecked) "Full Time" else "Part Time"
             val dept = atcv_dept.text.toString()
 
-            if (validateInputs(username, email)) {
-                if (emailValidate(email)) {
+            if (Validator.validateInputs(username, email)) {
+                if (Validator.validateEmail(email)) {
                     val member = Member(tMember.id, username, email, gender, empType, dept)
                     updateMember(member)
                 } else {
@@ -117,14 +118,14 @@ class UpdateMemberActivity : AppCompatActivity() {
         }
     }
 
-    private fun emailValidate(email: String): Boolean {
-        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun validateInputs(
-        username: String,
-        email: String,
-    ): Boolean {
-        return !(username.isEmpty() || email.isEmpty())
-    }
+//    private fun emailValidate(email: String): Boolean {
+//        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//    }
+//
+//    private fun validateInputs(
+//        username: String,
+//        email: String,
+//    ): Boolean {
+//        return !(username.isEmpty() || email.isEmpty())
+//    }
 }
