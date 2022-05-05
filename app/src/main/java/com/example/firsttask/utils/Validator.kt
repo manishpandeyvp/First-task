@@ -1,9 +1,10 @@
 package com.example.firsttask.utils
 
-abstract class Validator{
+abstract class Validator {
     companion object {
         fun validateEmail(email: String): Boolean {
-            return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+            return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                .matches()
         }
 
         fun validateInputs(

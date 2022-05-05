@@ -1,11 +1,11 @@
-package com.example.firsttask.activities
+package com.example.firsttask.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.firsttask.R
-import com.example.firsttask.fragments.add_member.AddMemberFragment
-import com.example.firsttask.fragments.all_members.AllMembersFragment
+import com.example.firsttask.ui.fragments.add_member.AddMemberFragment
+import com.example.firsttask.ui.fragments.all_members.AllMembersFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -15,13 +15,6 @@ class HomeActivity : AppCompatActivity() {
 
         setFragment(AllMembersFragment())
         bottom_nav.selectedItemId = R.id.menu_all_members
-
-//        if(bottom_nav.selectedItemId == R.id.menu_all_members){
-//            setFragment(AllMembersFragment())
-//        }
-//        if(bottom_nav.selectedItemId == R.id.menu_add_member){
-//            setFragment(AddMemberFragment())
-//        }
     }
 
     override fun onResume() {

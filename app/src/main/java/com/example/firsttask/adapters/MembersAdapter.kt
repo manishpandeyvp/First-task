@@ -1,6 +1,5 @@
 package com.example.firsttask.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,7 @@ import com.example.firsttask.R
 import com.example.firsttask.data.Member
 import kotlinx.android.synthetic.main.item_member.view.*
 
-class MembersAdapter(
-    private val context: Context
-) : RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
+class MembersAdapter : RecyclerView.Adapter<MembersAdapter.ViewHolder>() {
 
     private var membersList = emptyList<Member>()
     private var onClickListener: OnClickListener? = null
@@ -33,14 +30,17 @@ class MembersAdapter(
         view.tv_dept.text = member.dept
         view.tv_emp_type.text = member.empType
 
+        val demo: Demo = holder.itemView as Demo
+        demo.demoFun()
+
         view.iv_edit.setOnClickListener {
-            if(onClickListener != null){
+            if (onClickListener != null) {
                 onClickListener!!.onClickEdit(member)
             }
         }
 
         view.iv_delete.setOnClickListener {
-            if (onClickListener != null){
+            if (onClickListener != null) {
                 onClickListener!!.onClickDelete(member)
             }
         }
@@ -60,7 +60,11 @@ class MembersAdapter(
         fun onClickDelete(member: Member)
     }
 
-    fun setOnClickListener(onClickListener: OnClickListener){
+    interface Demo {
+        fun demoFun()
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
         this.onClickListener = onClickListener
     }
 

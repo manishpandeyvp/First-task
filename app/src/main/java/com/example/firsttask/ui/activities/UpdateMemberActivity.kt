@@ -1,4 +1,4 @@
-package com.example.firsttask.activities
+package com.example.firsttask.ui.activities
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -117,15 +117,4 @@ class UpdateMemberActivity : AppCompatActivity() {
             finish()
         }
     }
-
-//    private fun emailValidate(email: String): Boolean {
-//        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-//    }
-//
-//    private fun validateInputs(
-//        username: String,
-//        email: String,
-//    ): Boolean {
-//        return !(username.isEmpty() || email.isEmpty())
-//    }
 }

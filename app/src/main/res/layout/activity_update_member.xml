@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="15dp"
     android:paddingVertical="10dp"
-    tools:context=".activities.UpdateMemberActivity">
+    tools:context=".ui.activities.UpdateMemberActivity">
 
     <LinearLayout
         android:id="@+id/ll_header"

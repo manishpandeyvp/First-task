@@ -9,10 +9,10 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "members_list")
 data class Member(
     @PrimaryKey(autoGenerate = true)
-    val id : Int,
-    var name : String,
-    var email : String,
-    var gender : String,
-    var empType : String,
-    var dept  :String
+    val id: Int,
+    val name: String,
+    val email: String,
+    val gender: String,
+    val empType: String,
+    val dept: String
 ) : Parcelable

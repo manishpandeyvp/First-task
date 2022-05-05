@@ -1,8 +1,6 @@
 package com.example.firsttask.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 
 class MemberRepository(
     private val memberDao: MemberDao
@@ -14,7 +12,6 @@ class MemberRepository(
     }
 
     fun getUserWithEmail(email: String): LiveData<Member> {
-        Log.d("MANISH", memberDao.getUserWithEmail(email).value.toString())
         return memberDao.getUserWithEmail(email)
     }
 
@@ -22,7 +19,7 @@ class MemberRepository(
         memberDao.updateMember(member)
     }
 
-    suspend fun deleteMember(member: Member){
+    suspend fun deleteMember(member: Member) {
         memberDao.deleteMember(member)
     }
 }
